@@ -26,7 +26,7 @@ class AuthService {
 
       const res = await fetch(`${env.BETTER_AUTH_URL}/api/auth/phone-number/send-otp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Origin": env.BETTER_AUTH_URL },
         body: JSON.stringify({ phoneNumber }),
       });
 
@@ -43,7 +43,7 @@ class AuthService {
     if (!/^\+[1-9]\d{7,14}$/.test(phoneNumber)) throw new AppError("Invalid phone number format", 400);
     const res = await fetch(`${env.BETTER_AUTH_URL}/api/auth/phone-number/verify`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Origin": env.BETTER_AUTH_URL },
       body: JSON.stringify({ phoneNumber, code }),
     });
 
